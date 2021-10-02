@@ -9,98 +9,27 @@ import SwiftUI
 //import XCTest
 
 struct ContentView: View {
+    @StateObject var model = ContentViewModel()
+    
     var body: some View {
-        ZStack{
-            //background Layer
-            Color.purple
-                .opacity(0.1)
-                .ignoresSafeArea()
-
-           //foreground layer
-            VStack(spacing: 32){
-                VStack {
-                    Text("New York")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                    
-                    Text("12.45 PM")
-                        .font(.title3)
-                }
         
-                
-                VStack{
-                    Image(systemName: "cloud")
-                        .resizable()
-                        .frame(width: 120, height: 120)
-                    
-                    Text("23 °")
-                        .font(.system(size: 64))
-                    
-                    Text("Moon Cloud Fast Wind")
+        //foreground layer
+        NavigationView{
+            TabView{
+                ForEach(model.cities){ city in
+                    CityOverview(city: city.name, time: "12:45 PM")
                 }
-                .foregroundColor(.white)
-                .padding()
-                .padding(.vertical, 8)
-                .padding(.horizontal, 8)
-                .background(
-                RoundedRectangle(cornerRadius: 40)
-                    .fill(Color.purple)
-                )
-                .overlay(
-                Text("Sunday, October 2 2021")
-                    .padding(10)
-                    .background(
-                    RoundedRectangle(cornerRadius: 40)
-                    .fill(Color.white)
-                    )
-                    .offset(y: -10)
-                ,alignment: .top
-                )
-                .padding(.horizontal, 25)
-            
-            HStack(spacing: 10){
-                ValueDescriptionStack()
-                ValueDescriptionStack()
-                ValueDescriptionStack()
-                ValueDescriptionStack()
+                
+                /*CityOverview(city: "New York", time: "12:40 PM")
+                 CityOverview(city: "New York", time: "12:40 PM")
+                 CityOverview(city: "New York", time: "12:40 PM")*/
             }
-            .padding()
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity)
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+            .navigationBarHidden(true)
             .background(
-            RoundedRectangle(cornerRadius: 40)
-                .fill(Color.white)
-            )
-            .padding(.horizontal, 25)
-            
-                VStack (spacing : 16) {
-                    HStack {
-                        Text("Today")
-                        
-                        Spacer()
-                        
-                        Text("Next 7 Days")
-                        Image(systemName: "chevron.right")
-                    }
-                    .padding(.horizontal, 41)
-                    .font(Font.body.bold())
-                
-                    ScrollView(.horizontal){
-                        HStack (spacing : 10) {
-                            Spacer()
-                                .frame(width: 16)
-                            HourlyBox()
-                            HourlyBox()
-                            HourlyBox()
-                            HourlyBox()
-                        }
-                    }
-                    .padding(.vertical,30)
-                
-                }
-                
-            Spacer()
-          }
+                Color.purple
+                    .opacity(0.1)
+                    .ignoresSafeArea())
         }
     }
 }

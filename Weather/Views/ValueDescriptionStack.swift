@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct ValueDescriptionStack: View {
+    @State var icon: String
+    @State var boldText: String
+    @State var description: String
+    
     var body: some View {
         VStack{
-        Image(systemName: "house")
-        Text("42 %")
+        Image(systemName: icon)
+        Text(boldText)
             .fontWeight(.bold)
         
-        Text("Precipitation")
+        Text(description)
             .font(.footnote)
             .foregroundColor(.gray)
         }
@@ -23,6 +27,6 @@ struct ValueDescriptionStack: View {
 
 struct ValueDescriptionStack_Previews: PreviewProvider {
     static var previews: some View {
-        ValueDescriptionStack()
+        ValueDescriptionStack(icon: "cloud", boldText: "42 %", description: "Precipitation")
     }
 }
