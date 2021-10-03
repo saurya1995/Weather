@@ -11,6 +11,9 @@ import Combine
 final class CityOverviewModel: ObservableObject{
     @Published var lat: Double
     @Published var long: Double
+    @Published var name=""
+    @Published var time=""
+    @Published var date=""
     
     @Published var weatherData: WeatherData?
     @Published var iconURL: URL = URL(string : "https://openweathermap.org/img/wn/10d@2x.png")!
@@ -22,15 +25,25 @@ final class CityOverviewModel: ObservableObject{
     @Published var windSpeed:String = ""
     
     private var cancellables=Set<AnyCancellable>()
-    let dateFormatter: DateFormatter={
+    let timeFormatter: DateFormatter={
         let f=DateFormatter()
         f.dateFormat="HH:mm"
         return f
     }()
     
-    init(lat: Double, long: Double){
-        self.lat=lat
-        self.long=long
+    let dateFormatter: DateFormatter={
+        let f=DateFormatter()
+        f.dateFormat="EEEE, MMMM dd"
+        return f
+    }()
+    
+    init(city: City){
+        self.lat=city.lat
+        self.long=city.lon
+        self.name=city.name
+        self.time=timeFormatter.string(from: Date())
+        self.date=dateFormatter.string(from: Date())
+        
         load()
     }
     

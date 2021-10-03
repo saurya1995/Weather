@@ -10,6 +10,7 @@ import SwiftUI
 struct Next7DaysView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var forecasts:[Daily]
+    @State var name: String
     
     let dateFormatter: DateFormatter={
         let f=DateFormatter()
@@ -22,7 +23,7 @@ struct Next7DaysView: View {
             
             navigationBar
             
-            Text("City Name")
+            Text(name)
                 .font(.title)
                 .fontWeight(.semibold)
             
@@ -51,7 +52,7 @@ struct Next7DaysView: View {
         }
         .navigationBarHidden(true)
         .background(Color.purple
-                        .opacity(0.1)
+                        .opacity(0.2)
                         .ignoresSafeArea())
     }
     private var navigationBar: some View{

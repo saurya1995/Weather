@@ -10,10 +10,11 @@ import SDWebImageSwiftUI
 import SDWebImage
 
 struct CityOverview: View {
+    @ObservedObject var model : CityOverviewModel
     
-    @StateObject var model = CityOverviewModel(lat: 48.0, long: 49.0)
-    @State var city: String
-    @State var time: String
+    init(city: City){
+        self.model = CityOverviewModel(city: city)
+    }
     
     //all these are just
     var body: some View {
@@ -31,11 +32,11 @@ struct CityOverview: View {
     }
     private var header: some View{
         VStack {
-            Text(city)
+            Text(model.name)
                 .font(.title)
                 .fontWeight(.semibold)
             
-            Text(time)
+            Text(model.time)
                 .font(.title3)
         }
         
@@ -67,7 +68,7 @@ struct CityOverview: View {
                 .fill(Color.purple)
         )
         .overlay(
-            Text("Sunday, October 2 2021")
+            Text(model.date)
                 .padding(10)
                 .background(
                     RoundedRectangle(cornerRadius: 40)
@@ -104,7 +105,7 @@ struct CityOverview: View {
                 Spacer()
                 
                 if(model.weatherData != nil){
-                    NavigationLink(destination: Next7DaysView(forecasts: model.weatherData!.daily)){
+                    NavigationLink(destination: Next7DaysView(forecasts: model.weatherData!.daily,name: model.name)){
                         Text("Next 7 Days")
                         Image(systemName: "chevron.right")
                     }

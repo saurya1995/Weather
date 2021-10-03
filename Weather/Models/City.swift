@@ -7,19 +7,20 @@
 
 import Foundation
 
-struct City : Identifiable{
+struct City : Codable, Identifiable{
     
     let id = UUID()
+    
     let name: String
     let lat: Double
-    let long: Double
+    let lon: Double
     
     
-    static var placeHolder:[City]{
+    static var placeholder:[City]{
         [
-            City(name: "New York", lat: 0.0, long: 0.0),
-            City(name: "Munich", lat: 0.4, long: 0.2),
-            City(name: "Berlin", lat: 0.7, long: 0.9),
+            City(name: "New York", lat: 0.0, lon: 0.0),
+            City(name: "Munich", lat: 0.4, lon: 0.2),
+            City(name: "Berlin", lat: 0.7, lon: 0.9),
         ]
     }
 }

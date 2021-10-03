@@ -12,14 +12,13 @@ struct ContentView: View {
     @StateObject var model = ContentViewModel()
     
     var body: some View {
-        
         //foreground layer
         NavigationView{
             TabView{
+                AddCityView(model: model)
                 ForEach(model.cities){ city in
-                    CityOverview(city: city.name, time: "12:45 PM")
+                    CityOverview(city: city)
                 }
-                
                 /*CityOverview(city: "New York", time: "12:40 PM")
                  CityOverview(city: "New York", time: "12:40 PM")
                  CityOverview(city: "New York", time: "12:40 PM")*/
@@ -28,7 +27,7 @@ struct ContentView: View {
             .navigationBarHidden(true)
             .background(
                 Color.purple
-                    .opacity(0.1)
+                    .opacity(0.2)
                     .ignoresSafeArea())
         }
     }
