@@ -6,17 +6,25 @@
 //
 
 import SwiftUI
+import SDWebImage
+import SDWebImageSwiftUI
 
 struct HourlyBox: View {
+    @State var time: String
+    @State var icon: URL
+    @State var temp: String
+    
     var body: some View {
         VStack{
             Text("8:00 AM")
+            //Text(time)
             
-            Image(systemName: "cloud")
+            WebImage(url: icon)
                 .resizable()
+                .scaledToFit()
                 .frame(width: 50, height: 50)
             
-            Text("23 °")
+            Text(temp)
                 .fontWeight(.semibold)
         }
         .foregroundColor(.white)
@@ -30,8 +38,10 @@ struct HourlyBox: View {
     }
 }
 
+/*
 struct HourlyBox_Previews: PreviewProvider {
     static var previews: some View {
         HourlyBox()
     }
 }
+*/
