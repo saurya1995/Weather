@@ -81,10 +81,10 @@ struct CityOverview: View {
     
     private var informationBox: some View{
         HStack(spacing: 16){
-            ValueDescriptionStack(icon: "cloud", boldText: model.feelsLike, description: "Feels Like")
-            ValueDescriptionStack(icon: "cloud", boldText: model.humidity, description: "Humidity")
-            ValueDescriptionStack(icon: "cloud", boldText: model.pressure, description: "Pressure")
-            ValueDescriptionStack(icon: "cloud", boldText: model.windSpeed, description: "Windspeed")
+            ValueDescriptionStack(icon: "cloud", boldText: $model.feelsLike, description: "Feels Like")
+            ValueDescriptionStack(icon: "cloud", boldText: $model.humidity, description: "Humidity")
+            ValueDescriptionStack(icon: "cloud", boldText: $model.pressure, description: "Pressure")
+            ValueDescriptionStack(icon: "cloud", boldText: $model.windSpeed, description: "Windspeed")
         }
         .padding()
         .padding(.vertical, 8)
@@ -103,11 +103,13 @@ struct CityOverview: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: Next7DaysView()){
-                    Text("Next 7 Days")
-                    Image(systemName: "chevron.right")
+                if(model.weatherData != nil){
+                    NavigationLink(destination: Next7DaysView(forecasts: model.weatherData!.daily)){
+                        Text("Next 7 Days")
+                        Image(systemName: "chevron.right")
+                    }
+                    .foregroundColor(.primary)
                 }
-                .foregroundColor(.primary)
             }
             .padding(.horizontal, 41)
             .font(Font.body.bold())
@@ -120,7 +122,7 @@ struct CityOverview: View {
                     if model.weatherData != nil{
                         ForEach(model.weatherData!.hourly, id: \.dt){ forecast in
                             let url = URL(string : "https://openweathermap.org/img/wn/\(forecast.weather.first?.icon ?? "10d")@2x.png")!
-                            HourlyBox(time: forecast.dt.description, icon: url, temp: "\(forecast.temp)")
+                            HourlyBox(time: model.dateFormatter.string(from: forecast.dt), icon: url, temp: "\(forecast.temp) °")
                         }
                     }
                     //let url = URL(string :"http://openweathermap.org/img/wn/10d@2x.png")!

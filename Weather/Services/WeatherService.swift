@@ -9,8 +9,8 @@ import Combine
 import Foundation
 
 struct WeatherService{
-    static func getWeatherData(lat: Double, long: Double) -> AnyPublisher<WeatherData, Error>{
-        let url=URL(string:"https://api.openweathermap.org/data/2.5/onecall?lat=\(lat)&lon=\(long)&appid=\(Statics.apiKey)")!
+    static func getWeatherData(lat: Double, long: Double, units:String="metric") -> AnyPublisher<WeatherData, Error>{
+        let url=URL(string:"https://api.openweathermap.org/data/2.5/onecall?lat=\(lat)&lon=\(long)&units=\(units)&appid=\(Statics.apiKey)")!
       
         return URLSession.shared
             .dataTaskPublisher(for: url)

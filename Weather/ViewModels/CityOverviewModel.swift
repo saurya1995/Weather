@@ -11,41 +11,22 @@ import Combine
 final class CityOverviewModel: ObservableObject{
     @Published var lat: Double
     @Published var long: Double
+    
     @Published var weatherData: WeatherData?
+    @Published var iconURL: URL = URL(string : "https://openweathermap.org/img/wn/10d@2x.png")!
+    @Published var temp:String = ""
+    @Published var description:String = ""
+    @Published var feelsLike:String = ""
+    @Published var pressure:String = ""
+    @Published var humidity:String = ""
+    @Published var windSpeed:String = ""
     
     private var cancellables=Set<AnyCancellable>()
-    
-    var icon:String{
-        weatherData?.current.weather.first?.icon ??
-        "10d"
-    }
-    
-    var iconURL: URL{
-        URL(string : "https://openweathermap.org/img/wn/\(icon)@2x.png")!
-    }
-    var temp: String{
-        "\(weatherData?.current.temp ?? 0)°"
-    }
-    
-    var description: String{
-        weatherData?.current.weather.first?.description ?? ""
-    }
-    
-    var feelsLike: String{
-        "\(weatherData?.current.feelsLike ?? 0)"
-    }
-    
-    var pressure: String{
-        "\(weatherData?.current.pressure ?? 0)"
-    }
-    
-    var humidity: String{
-        "\(weatherData?.current.humidity ?? 0)"
-    }
-    
-    var windSpeed: String{
-        "\(weatherData?.current.windSpeed ?? 0)"
-    }
+    let dateFormatter: DateFormatter={
+        let f=DateFormatter()
+        f.dateFormat="HH:mm"
+        return f
+    }()
     
     init(lat: Double, long: Double){
         self.lat=lat
@@ -62,9 +43,18 @@ final class CityOverviewModel: ObservableObject{
                     return
                 case .finished: return
                 }
-            } receiveValue: { [weak self](WeatherData) in
-                self?.weatherData = WeatherData
-                dump(WeatherData)
+            } receiveValue: { [weak self](weatherData) in
+                DispatchQueue.main.async {
+                    self?.weatherData = weatherData
+                    let icon = weatherData.current.weather.first?.icon ?? "10d"
+                    self?.iconURL = URL(string : "https://openweathermap.org/img/wn/\(icon)@2x.png")!
+                    self?.temp = "\(weatherData.current.temp) °"
+                    self?.description = "\(weatherData.current.weather.first?.description ?? "") °"
+                    self?.temp = "\(weatherData.current.feelsLike) °"
+                    self?.temp = "\(weatherData.current.pressure)"
+                    self?.temp = "\(weatherData.current.humidity)"
+                    self?.temp = "\(weatherData.current.windSpeed)"
+                }
             }
             .store(in: &cancellables)
     }

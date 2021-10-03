@@ -9,6 +9,13 @@ import SwiftUI
 
 struct Next7DaysView: View {
     @Environment(\.presentationMode) var presentationMode
+    @State var forecasts:[Daily]
+    
+    let dateFormatter: DateFormatter={
+        let f=DateFormatter()
+        f.dateFormat="dd:MM"
+        return f
+    }()
     
     var body: some View {
         ScrollView{
@@ -23,10 +30,13 @@ struct Next7DaysView: View {
                 .frame(height: 50)
             
             VStack(spacing: 16){
-                DailyForecastView(date: "April 1", icon: "icon", high: "15°", low: "-2°")
+                ForEach(forecasts, id: \.dt){ forecast in
+                    DailyForecastView(date: dateFormatter.string(from: forecast.dt), icon: forecast.weather.first?.icon ?? "10d", high: "\(forecast.temp.max)", low: "\(forecast.temp.min)")
+                        }
+                /*DailyForecastView(date: "April 1", icon: "icon", high: "15°", low: "-2°")
                 DailyForecastView(date: "April 2", icon: "icon", high: "15°", low: "-2°")
                 DailyForecastView(date: "April 3", icon: "icon", high: "15°", low: "-2°")
-                DailyForecastView(date: "April 4", icon: "icon", high: "15°", low: "-2°")
+                DailyForecastView(date: "April 4", icon: "icon", high: "15°", low: "-2°")*/
             }
             .padding()
             .padding(.vertical, 8)
@@ -63,8 +73,9 @@ struct Next7DaysView: View {
     }
 }
 
+/*
 struct Next7DaysView_Previews: PreviewProvider {
     static var previews: some View {
         Next7DaysView()
     }
-}
+}*/

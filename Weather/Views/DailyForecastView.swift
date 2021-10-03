@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SDWebImage
+import SDWebImageSwiftUI
 
 struct DailyForecastView: View {
     @State var date: String
@@ -19,15 +21,21 @@ struct DailyForecastView: View {
                 .font(.title3)
                 .fontWeight(.semibold)
             Spacer()
+        
+            WebImage(url: URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png"))
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
             
-            Image(systemName: icon)
+            //Image(systemName: icon)
             
-            VStack{
+            VStack(alignment: .trailing){
                 Text(high)
                     .fontWeight(.semibold)
                 
                 Text(low)
             }
+            .frame(width: 70)
         }
     }
 }

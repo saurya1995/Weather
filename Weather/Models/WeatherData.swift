@@ -27,7 +27,7 @@ struct WeatherData: Codable {
 
 // MARK: - Current
 struct Current: Codable {
-    let dt: Int
+    let dt: Date
     let sunrise, sunset: Int?
     let temp, feelsLike: Double
     let pressure, humidity: Int
@@ -94,7 +94,7 @@ enum Main: String, Codable {
 
 // MARK: - Daily
 struct Daily: Codable {
-    let dt, sunrise, sunset, moonrise: Int
+    let dt, sunrise, sunset, moonrise: Date
     let moonset: Int
     let moonPhase: Double
     let temp: Temp
