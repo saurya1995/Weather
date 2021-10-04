@@ -18,7 +18,7 @@ struct City : Codable, Identifiable{
     
     static var placeholder:[City]{
         [
-            City(name: "New York", lat: 0.0, lon: 0.0),
+            City(name: "New York", lat: 30, lon: 30),
             City(name: "Munich", lat: 0.4, lon: 0.2),
             City(name: "Berlin", lat: 0.7, lon: 0.9),
         ]

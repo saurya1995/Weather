@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 struct WeatherService{
-    static func getWeatherData(lat: Double, long: Double, units:String="metric") -> AnyPublisher<WeatherData, Error>{
+    /*static func getWeatherData(lat: Double, long: Double, units:String="metric") -> AnyPublisher<WeatherData, Error>{
         let url=URL(string:"https://api.openweathermap.org/data/2.5/onecall?lat=\(lat)&lon=\(long)&units=\(units)&appid=\(Statics.apiKey)")!
       
         return URLSession.shared
@@ -24,7 +24,15 @@ struct WeatherService{
                         }
                     .decode(type: WeatherData.self, decoder: JSONDecoder())
                     .eraseToAnyPublisher()
-            }
+            }*/
+    
+    static func getWeatherData(lat: Double, long: Double, units:String="metric") async throws -> WeatherData{
+        let url=URL(string:"https://api.openweathermap.org/data/2.5/onecall?lat=\(lat)&lon=\(long)&units=\(units)&appid=\(Statics.apiKey)")!
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let weatherdata = try JSONDecoder().decode(WeatherData.self, from: data)
+        return weatherdata
+    }
     
     static func getCity(for name: String)->AnyPublisher<[City], Error>{
         let url = URL(string: "https://api.openweathermap.org/geo/1.0/direct?q=\(name)&limit=1&appid=\(Statics.apiKey)")!
