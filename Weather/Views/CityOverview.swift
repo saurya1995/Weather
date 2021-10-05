@@ -39,7 +39,14 @@ struct CityOverview: View {
             Text(model.time)
                 .font(.title3)
         }
-        
+        .toolbar{
+            ToolbarItem(placement: .navigationBarLeading){
+                Image(systemName: "camera")
+            }
+            ToolbarItem(placement: .navigationBarTrailing){
+                Image(systemName: "paperplane")
+            }
+        }
     }
     
     private var currentWeather: some View {
@@ -130,7 +137,7 @@ struct CityOverview: View {
                     if model.weatherData != nil{
                         ForEach(model.weatherData!.hourly, id: \.dt){ forecast in
                             let url = URL(string : "https://openweathermap.org/img/wn/\(forecast.weather.first?.icon ?? "10d")@2x.png")!
-                            HourlyBox(time: model.dateFormatter.string(from: forecast.dt), icon: url, temp: "\(forecast.temp) °")
+                            HourlyBox(time: model.timeFormatter.string(from: forecast.dt), icon: url, temp: "\(forecast.temp) °")
                         }
                     }
                     //let url = URL(string :"http://openweathermap.org/img/wn/10d@2x.png")!

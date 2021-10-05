@@ -16,8 +16,8 @@ struct HourlyBox: View {
     
     var body: some View {
         VStack{
-            Text("8:00 AM")
-            //Text(time)
+            //Text("8:00 AM")
+            Text(time)
             
             WebImage(url: icon)
                 .resizable()
