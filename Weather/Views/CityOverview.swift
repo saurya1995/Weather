@@ -51,7 +51,7 @@ struct CityOverview: View {
             WebImage(url: model.iconURL)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 120, height: 120)
+                .frame(width: 120, height: 90)
             
             //Text("23 °")
             Text(model.temp)
@@ -65,7 +65,8 @@ struct CityOverview: View {
         .padding(.horizontal, 8)
         .background(
             RoundedRectangle(cornerRadius: 40)
-                .fill(Color.purple)
+                .fill(Color.blue)
+                .opacity(0.7)
         )
         .overlay(
             Text(model.date)
@@ -110,6 +111,12 @@ struct CityOverview: View {
                         Image(systemName: "chevron.right")
                     }
                     .foregroundColor(.primary)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(Color.green)
+                            .opacity(0.5)
+                    )
                 }
             }
             .padding(.horizontal, 41)

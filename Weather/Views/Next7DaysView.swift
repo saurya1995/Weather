@@ -51,7 +51,7 @@ struct Next7DaysView: View {
             Spacer()
         }
         .navigationBarHidden(true)
-        .background(Color.purple
+        .background(Color.blue
                         .opacity(0.2)
                         .ignoresSafeArea())
     }

@@ -33,7 +33,8 @@ struct HourlyBox: View {
         .padding(.horizontal, 8)
         .background(
         RoundedRectangle(cornerRadius: 40)
-            .fill(Color.purple)
+            .fill(Color.blue)
+            .opacity(0.7)
         )
     }
 }
