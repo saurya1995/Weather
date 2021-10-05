@@ -25,6 +25,7 @@ final class ContentViewModel: ObservableObject {
                 switch completion{
                 case .failure(let error):
                     print(error.localizedDescription)
+                    print("inside content view model")
                     return
                 case .finished: return
                 }

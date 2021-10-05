@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Next7DaysView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var forecasts:[Daily]
+    @State var forecasts:[WeatherData.Daily]
     @State var name: String
     
     let dateFormatter: DateFormatter={

@@ -43,16 +43,19 @@ final class CityOverviewModel: ObservableObject{
         self.name=city.name
         self.time=timeFormatter.string(from: Date())
         self.date=dateFormatter.string(from: Date())
-        
+        print("latitude",lat)
         load()
+
     }
     
     func load(){
+        
         WeatherService.getWeatherData(lat: lat, long: long)
             .sink { (completion) in
                 switch completion{
                 case .failure(let error):
                     print(error.localizedDescription)
+                    print("inside sink subscriber")
                     return
                 case .finished: return
                 }
@@ -63,12 +66,25 @@ final class CityOverviewModel: ObservableObject{
                     self?.iconURL = URL(string : "https://openweathermap.org/img/wn/\(icon)@2x.png")!
                     self?.temp = "\(weatherData.current.temp) °"
                     self?.description = "\(weatherData.current.weather.first?.description ?? "") °"
-                    self?.temp = "\(weatherData.current.feelsLike) °"
-                    self?.temp = "\(weatherData.current.pressure)"
-                    self?.temp = "\(weatherData.current.humidity)"
-                    self?.temp = "\(weatherData.current.windSpeed)"
+                    self?.feelsLike = "\(weatherData.current.feelsLike) °"
+                    self?.pressure = "\(weatherData.current.pressure)"
+                    self?.humidity = "\(weatherData.current.humidity)"
+                    self?.windSpeed = "\(weatherData.current.windSpeed)"
                 }
             }
             .store(in: &cancellables)
+      /*  do{
+            weatherData = try await WeatherService.getWeatherData(lat: lat, long: long)
+            let icon = weatherData?.current.weather.first?.icon ?? "10d"
+            iconURL = URL(string : "https://openweathermap.org/img/wn/\(icon)@2x.png")!
+            temp = "\(weatherData?.current.temp ?? 0) °"
+            description = "\(weatherData?.current.weather.first?.description ?? " ") °"
+            feelsLike = "\(weatherData?.current.feelsLike ?? 0) °"
+            pressure = "\(weatherData?.current.pressure ?? 0)"
+            humidity = "\(weatherData?.current.humidity ?? 0)"
+            windSpeed = "\(weatherData?.current.windSpeed ?? 0)"
+        } catch{
+            print(error)
+        }*/
     }
 }

@@ -1,5 +1,5 @@
 //
-//  WeatherData.swift
+//  WeatherDataModel.swift
 //  Weather
 //
 //  Created by Saurya on 04.10.21.
@@ -45,7 +45,6 @@ struct WeatherData: Codable{
     }
     
     struct Hourly: Codable{
-
         struct Weather: Codable{
             let id: Int
             let main: String
@@ -53,8 +52,8 @@ struct WeatherData: Codable{
             let icon: String
         }
         let dt: Date
-        let temp: Double
-        let feelsLike: Double
+        let temp: Temp
+        let feelsLike: FeelsLike
         let pressure, humidity: Int
         let dewPoint, windSpeed: Double
         let uvi: Double
@@ -90,7 +89,7 @@ struct WeatherData: Codable{
             let morn: Double
         }
         
-        struct FeelsLike: Codable{
+        struct feelsLike: Codable{
             let day: Double
             let night: Double
             let eve: Double
@@ -157,4 +156,3 @@ struct WeatherData: Codable{
     }
     
 }
-
