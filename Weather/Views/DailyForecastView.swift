@@ -32,6 +32,7 @@ struct DailyForecastView: View {
             VStack(alignment: .trailing){
                 Text(high)
                     .fontWeight(.semibold)
+                    .foregroundColor(.red)
                 
                 Text(low)
             }
