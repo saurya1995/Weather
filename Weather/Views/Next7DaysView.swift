@@ -14,7 +14,7 @@ struct Next7DaysView: View {
     
     let dateFormatter: DateFormatter={
         let f=DateFormatter()
-        f.dateFormat="dd:MM"
+        f.dateFormat="dd/MM"
         return f
     }()
     
@@ -28,7 +28,6 @@ struct Next7DaysView: View {
                 .fontWeight(.semibold)
             
             Spacer()
-                .frame(height: 50)
             
             List{
                 ForEach(forecasts, id: \.dt){ forecast in
@@ -37,7 +36,7 @@ struct Next7DaysView: View {
                 /*DailyForecastView(date: "April 1", icon: "icon", high: "15°", low: "-2°")
                 DailyForecastView(date: "April 4", icon: "icon", high: "15°", low: "-2°")*/
             }
-            .listStyle(InsetListStyle())
+            .listStyle(PlainListStyle())
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 40)

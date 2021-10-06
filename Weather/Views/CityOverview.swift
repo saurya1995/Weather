@@ -39,14 +39,6 @@ struct CityOverview: View {
             Text(model.time)
                 .font(.title3)
         }
-        .toolbar{
-            ToolbarItem(placement: .navigationBarLeading){
-                Image(systemName: "camera")
-            }
-            ToolbarItem(placement: .navigationBarTrailing){
-                Image(systemName: "paperplane")
-            }
-        }
     }
     
     private var currentWeather: some View {

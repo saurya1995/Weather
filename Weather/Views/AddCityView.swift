@@ -15,14 +15,11 @@ struct AddCityView: View {
         VStack{
             Spacer()
             
-            VStack{
-                Text("Instant Weather")
-                    .font(.system(size: 30))
-                    .foregroundColor(Color.white)
-                    .padding()
-                    .clipShape(Capsule())
-            }
-            .padding()
+            Text("Instant Weather")
+                .font(.system(size: 30))
+                .foregroundColor(Color.white)
+                .padding()
+                .clipShape(Capsule())
             
             VStack{
                 TextField("New City", text: $model.newCityName)
