@@ -43,7 +43,6 @@ final class CityOverviewModel: ObservableObject{
         self.name=city.name
         self.time=timeFormatter.string(from: Date())
         self.date=dateFormatter.string(from: Date())
-        print("latitude",lat)
         load()
 
     }

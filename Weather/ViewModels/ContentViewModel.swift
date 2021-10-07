@@ -19,21 +19,27 @@ final class ContentViewModel: ObservableObject {
     }
     
     func addCity(){
-        WeatherService
-            .getCity(for: newCityName)
-            .sink { (completion) in
-                switch completion{
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    print("inside content view model")
-                    return
-                case .finished: return
-                }
-            } receiveValue: { [weak self](city) in
-                DispatchQueue.main.async {
-                    self?.cities.append(contentsOf: city)
+        var flag = true
+        for city in cities{
+            if city.name==newCityName{
+                flag=false
+                print("Already Added \(newCityName)")
+            }
+        }
+        
+        if flag {
+            Task.init {
+                do{
+                    let newcities:[City] = try await WeatherService.getCity(for: newCityName)
+                    for newcity in newcities{
+                        cities.append(newcity)
+                    }
+                } catch{
+                    print("Request failed with error: \(error)")
                 }
             }
-            .store(in: &cancellables)
+        }
     }
+    
+    
 }

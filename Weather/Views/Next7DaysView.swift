@@ -29,6 +29,12 @@ struct Next7DaysView: View {
             
             Spacer()
             
+            HStack(alignment: .bottom){
+                Text("Future Forecast")
+                    .font(.title2)
+                    .foregroundColor(.white)
+            }
+            
             List{
                 ForEach(forecasts, id: \.dt){ forecast in
                     DailyForecastView(date: dateFormatter.string(from: forecast.dt), icon: forecast.weather.first?.icon ?? "10d", high: "\(forecast.temp.max)°", low: "\(forecast.temp.min)°")
