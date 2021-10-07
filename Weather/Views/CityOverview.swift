@@ -38,7 +38,7 @@ struct CityOverview: View {
             
             Text(model.time)
                 .font(.title3)
-        }
+        }.padding(.top,10)
     }
     
     private var currentWeather: some View {
