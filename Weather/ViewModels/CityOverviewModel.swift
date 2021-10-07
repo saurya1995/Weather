@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 final class CityOverviewModel: ObservableObject{
+    
     @Published var lat: Double
     @Published var long: Double
     @Published var name=""
@@ -72,18 +73,5 @@ final class CityOverviewModel: ObservableObject{
                 }
             }
             .store(in: &cancellables)
-      /*  do{
-            weatherData = try await WeatherService.getWeatherData(lat: lat, long: long)
-            let icon = weatherData?.current.weather.first?.icon ?? "10d"
-            iconURL = URL(string : "https://openweathermap.org/img/wn/\(icon)@2x.png")!
-            temp = "\(weatherData?.current.temp ?? 0) °"
-            description = "\(weatherData?.current.weather.first?.description ?? " ") °"
-            feelsLike = "\(weatherData?.current.feelsLike ?? 0) °"
-            pressure = "\(weatherData?.current.pressure ?? 0)"
-            humidity = "\(weatherData?.current.humidity ?? 0)"
-            windSpeed = "\(weatherData?.current.windSpeed ?? 0)"
-        } catch{
-            print(error)
-        }*/
     }
 }

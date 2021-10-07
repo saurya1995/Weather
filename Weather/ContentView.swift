@@ -20,7 +20,6 @@ struct ContentView: View {
                     CityOverview(city: city)
                 }
                 /*CityOverview(city: "New York", time: "12:40 PM")
-                 CityOverview(city: "New York", time: "12:40 PM")
                  CityOverview(city: "New York", time: "12:40 PM")*/
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
